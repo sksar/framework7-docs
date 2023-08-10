@@ -1,3 +1,5 @@
+name: Build and Publish
+
 on:
   push:
   workflow_dispatch:
@@ -15,6 +17,7 @@ jobs:
         uses: actions/setup-node@v3
       - name: Build
         run: |
+          mkdir temp
           cd temp
           git clone https://github.com/framework7io/framework7-website
           cd framework7-website
