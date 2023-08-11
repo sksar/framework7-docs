@@ -19,6 +19,7 @@ jobs:
         uses: actions/setup-node@v3
       - name: Build
         run: |
+          rm -rf docs
           mkdir temp
           cd temp
           git clone https://github.com/framework7io/framework7-website
