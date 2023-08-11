@@ -19,13 +19,13 @@ jobs:
         uses: actions/setup-node@v3
       - name: Build
         run: |
-          rm -rf docs
           mkdir temp
           cd temp
           git clone https://github.com/framework7io/framework7-website
           cd framework7-website
           npm install
           npm run build
+          rm -rf ../../docs
           mv public ../../docs
       - name: Commit and Push
         uses: stefanzweifel/git-auto-commit-action@v4
