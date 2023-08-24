@@ -2357,7 +2357,7 @@
   var Clipboard = {
     el: undefined,
     createEl: function createEl() {
-      var el = document.createElement('div');
+      var el = document.createElement('textarea');
       el.style.display = 'none';
       el.style.position = 'absolute';
       el.style.visibility = 'hidden';
@@ -2913,12 +2913,30 @@
     });
   }
 
+  function initCopyCode() {
+    $('pre').each(function (preElement) {
+      var $button = $("<button class=\"f7-copy-btn\">\n        <i class=\"f7-icons f7-copy-icon\">square_on_square</i>\n        <i class=\"f7-icons f7-check-icon hidden\">checkmark_alt</i>\n      </button>");
+      $(preElement).append($button);
+      $button.on('click', function onClick() {
+        var el = this;
+        var text = $(el).prev().text();
+        console.log(text);
+        copyToClipboard(text);
+        $button.find('.f7-copy-icon, .f7-check-icon').toggleClass('hidden');
+        setTimeout(function () {
+          $button.find('.f7-copy-icon, .f7-check-icon').toggleClass('hidden');
+        }, 2000);
+      });
+    });
+  }
+
   Object.keys(methods).forEach(function (key) {
     $.fn[key] = methods[key];
   });
   initHomeCanvas();
   initDocsTables();
   initDocsSearch();
+  initCopyCode();
   initDocsDevice();
   initDocsNav();
   initUiInitiativeTemplates();
